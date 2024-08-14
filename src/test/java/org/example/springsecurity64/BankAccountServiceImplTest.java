@@ -7,10 +7,9 @@ import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
-class BankAccountServiceTest {
-	BankAccountService account = new BankAccountServiceProxy();
+class BankAccountServiceImplTest {
+	BankAccountService account = new BankAccountServiceProxy(new BankAccountServiceImpl());
 
 	@AfterEach
 	void cleanup() {

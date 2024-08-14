@@ -6,11 +6,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.security.Principal;
 
-public class BankAccountServiceProxy extends BankAccountService {
+public class BankAccountServiceProxy implements BankAccountService {
+	final BankAccountService delegate;
+
+	public BankAccountServiceProxy(BankAccountService delegate) {
+		this.delegate = delegate;
+	}
 
 	@Override
 	public BankAccount findById(int id) {
-		BankAccount result = super.findById(id);
+		BankAccount result = delegate.findById(id);
 		Principal user = SecurityContextHolder.getContext().getAuthentication();
 		if (!user.getName().equals(result.getOwner())) {
 			throw new AuthorizationDeniedException("Denied", new AuthorizationDecision(false));
@@ -20,6 +25,6 @@ public class BankAccountServiceProxy extends BankAccountService {
 
 	@Override
 	public BankAccount getById(int id) {
-		return super.getById(id);
+		return delegate.getById(id);
 	}
 }
