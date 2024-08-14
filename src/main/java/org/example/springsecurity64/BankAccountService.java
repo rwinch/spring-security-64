@@ -9,10 +9,7 @@ import java.security.Principal;
 public class BankAccountService {
 	public BankAccount findById(int id) {
 		BankAccount result = new BankAccount(id, "rob", "1234", 54321);
-		Principal user = SecurityContextHolder.getContext().getAuthentication();
-		if (!user.getName().equals(result.getOwner())) {
-			throw new AuthorizationDeniedException("Denied", new AuthorizationDecision(false));
-		}
+
 		return result;
 	}
 

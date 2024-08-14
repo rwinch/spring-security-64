@@ -1,5 +1,6 @@
 package org.example.springsecurity64;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.authorization.AuthorizationDeniedException;
@@ -9,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankAccountServiceTest {
-	BankAccountService account = new BankAccountService();
+	BankAccountService account = new BankAccountServiceProxy();
 
 	@AfterEach
 	void cleanup() {
