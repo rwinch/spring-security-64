@@ -42,4 +42,18 @@ class BankAccountServiceImplTest {
 		assertThatExceptionOfType(AuthorizationDeniedException.class)
 				.isThrownBy(() -> this.account.getById(1));
 	}
+
+	@Test
+	@WithMockAccountant
+	void getByIdWhenAccountantGranted() {
+		this.account.getById(1);
+	}
+
+	@Test
+	@WithMockAccountant
+	void getAccountNumberWhenAccountantDenied() {
+		BankAccount account = this.account.getById(1);
+		assertThatExceptionOfType(AuthorizationDeniedException.class)
+				.isThrownBy(() -> account.getAccountNumber());
+	}
 }

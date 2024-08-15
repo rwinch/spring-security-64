@@ -6,6 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-@PostAuthorize("returnObject?.owner == authentication?.name")
+@PostAuthorize("returnObject?.owner == authentication?.name or hasRole('ACCOUNTANT')")
 public @interface PostReadBankAccount {
 }
