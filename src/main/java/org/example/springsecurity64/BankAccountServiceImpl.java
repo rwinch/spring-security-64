@@ -1,5 +1,8 @@
 package org.example.springsecurity64;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class BankAccountServiceImpl implements BankAccountService {
 	@Override
 	public BankAccount findById(int id) {
