@@ -1,11 +1,9 @@
 package org.example.springsecurity64;
 
-import org.springframework.security.access.prepost.PostAuthorize;
-
 public interface BankAccountService {
-	@PostAuthorize("returnObject?.owner == authentication?.name")
+	@PostReadBankAccount
 	BankAccount findById(int id);
 
-	@PostAuthorize("returnObject?.owner == authentication?.name")
+	@PostReadBankAccount
 	BankAccount getById(int id);
 }
