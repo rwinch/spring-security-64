@@ -25,6 +25,11 @@ public class BankAccountServiceProxy implements BankAccountService {
 
 	@Override
 	public BankAccount getById(int id) {
-		return delegate.getById(id);
+		BankAccount result = delegate.getById(id);
+		Principal user = SecurityContextHolder.getContext().getAuthentication();
+		if (!user.getName().equals(result.getOwner())) {
+			throw new AuthorizationDeniedException("Denied", new AuthorizationDecision(false));
+		}
+		return result;
 	}
 }
