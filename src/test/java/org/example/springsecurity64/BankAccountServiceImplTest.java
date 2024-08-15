@@ -15,26 +15,26 @@ class BankAccountServiceImplTest {
 	BankAccountService account = new BankAccountServiceProxy(new BankAccountServiceImpl());
 
 	@Test
-	@WithMockUser("rob")
+	@WithMockRob
 	void findByIdGranted() {
 		this.account.findById(1);
 	}
 
 	@Test
-	@WithMockUser("josh")
+	@WithMockJosh
 	void findByIdDenied() {
 		assertThatExceptionOfType(AuthorizationDeniedException.class)
 				.isThrownBy(() -> this.account.findById(1));
 	}
 
 	@Test
-	@WithMockUser("rob")
+	@WithMockRob
 	void getByIdGranted() {
 		this.account.getById(1);
 	}
 
 	@Test
-	@WithMockUser("josh")
+	@WithMockJosh
 	void getByIdDenied() {
 		assertThatExceptionOfType(AuthorizationDeniedException.class)
 				.isThrownBy(() -> this.account.getById(1));
