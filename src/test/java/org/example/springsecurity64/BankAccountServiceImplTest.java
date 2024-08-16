@@ -51,4 +51,34 @@ class BankAccountServiceImplTest {
 		BankAccount account = this.account.getById(1);
 		assertThat(account.getAccountNumber()).isEqualTo("****");
 	}
+
+	@Test
+	@WithMockRob
+	void saveWhenGranted() {
+		BankAccount account = this.account.getById(1);
+		this.account.save(account);
+	}
+
+	@Test
+	@WithMockRob
+	void updateWhenGranted() {
+		BankAccount account = this.account.getById(1);
+		this.account.update(account);
+	}
+
+	@Test
+	@WithMockJosh
+	void saveWhenDenied() {
+		BankAccount account = new BankAccount(1, "rob", "1234", 54321);
+		assertThatExceptionOfType(AuthorizationDeniedException.class)
+				.isThrownBy(() -> this.account.update(account));
+	}
+
+	@Test
+	@WithMockJosh
+	void updateWhenDenied() {
+		BankAccount account = new BankAccount(1, "rob", "1234", 54321);
+		assertThatExceptionOfType(AuthorizationDeniedException.class)
+				.isThrownBy(() -> this.account.update(account));
+	}
 }

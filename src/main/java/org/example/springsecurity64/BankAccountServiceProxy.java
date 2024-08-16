@@ -32,4 +32,14 @@ public class BankAccountServiceProxy implements BankAccountService {
 		}
 		return result;
 	}
+
+	@Override
+	public void save(BankAccount toSave) {
+
+	}
+
+	@Override
+	public void update(BankAccount toUpdate) {
+
+	}
 }
