@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -48,7 +49,6 @@ class BankAccountServiceImplTest {
 	@WithMockAccountant
 	void getAccountNumberWhenAccountantDenied() {
 		BankAccount account = this.account.getById(1);
-		assertThatExceptionOfType(AuthorizationDeniedException.class)
-				.isThrownBy(() -> account.getAccountNumber());
+		assertThat(account.getAccountNumber()).isEqualTo("****");
 	}
 }

@@ -1,6 +1,7 @@
 package org.example.springsecurity64;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authorization.method.HandleAuthorizationDenied;
 
 public class BankAccount {
 	final int id;
@@ -24,6 +25,7 @@ public class BankAccount {
 	}
 
 	@PreAuthorize("this.owner == authentication?.name")
+	@HandleAuthorizationDenied(handlerClass = MaskMethodAuthorizationDeniedHandler.class)
 	public String getAccountNumber() {
 		return accountNumber;
 	}
